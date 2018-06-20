@@ -45,3 +45,4 @@ playground.xcworkspace
 
 # Server
 /nginx/logs
+/nginx/ssl

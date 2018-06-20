@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: web:dev
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    entrypoint: bash
+  nginx:
+    env_file: ./nginx/dev.env
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile-nginx
+      args:
+        - DOMAIN
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Public:/home/hello-world/Public
+      - ./nginx/ssl:/var/www/ssl
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - web

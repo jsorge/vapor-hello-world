@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  web:
+    image: jsorge/hello-world
+    volumes:
+      - ./Public:/app/Public
+  nginx:
+    env_file: ./nginx/prod.env
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile-nginx
+      args:
+        - DOMAIN
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Public:/home/hello-world/Public
+      - ./nginx/ssl:/var/www/ssl
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - web
