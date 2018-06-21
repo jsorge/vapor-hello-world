@@ -1,10 +1,12 @@
-ARG DOMAIN
-
 # build from the official Nginx image
 FROM nginx
 
 # install essential Linux packages
 RUN apt-get update -qq && apt-get -y install apache2-utils curl
+
+# sets the environment domain variable for use in other files
+ARG build_domain
+ENV DOMAIN $build_domain
 
 # where we store everything SSL-related
 ENV SSL_ROOT /var/www/ssl

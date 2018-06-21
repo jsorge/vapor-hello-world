@@ -11,12 +11,13 @@ services:
     tty: true
     entrypoint: bash
   nginx:
-    env_file: ./nginx/dev.env
     build:
       context: .
       dockerfile: ./nginx/Dockerfile-nginx
       args:
-        - DOMAIN
+        build_domain: hello.local
+    environment:
+      CA_SSL: "false" # change to "true" for production
     ports:
       - 80:80
       - 443:443

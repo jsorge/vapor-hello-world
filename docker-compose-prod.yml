@@ -5,12 +5,13 @@ services:
     volumes:
       - ./Public:/app/Public
   nginx:
-    env_file: ./nginx/prod.env
     build:
       context: .
       dockerfile: ./nginx/Dockerfile-nginx
       args:
-        - DOMAIN
+        build_domain: hello.world
+    environment:
+      CA_SSL: "true" # change to "true" for production
     ports:
       - 80:80
       - 443:443

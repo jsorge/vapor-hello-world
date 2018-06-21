@@ -1,4 +1,3 @@
-import Leaf
 import Vapor
 
 /// Register your application's routes here.
